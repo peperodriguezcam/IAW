@@ -195,3 +195,4 @@ practica1/
     ## Paso 2.1. Generación de Certificado SSL Autofirmado
 Me quedo aquí sin seguir hacer nada en la terminal.
     
+FALTA EDITAR EL /ETC/HOSTS/ PARA QUE APAREZCA LA PUB Y PRIV EN NAVEGADOR
