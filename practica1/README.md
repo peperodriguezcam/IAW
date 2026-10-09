@@ -1,4 +1,4 @@
-# Índice de la GuíaSección 
+# Índice de la GuíaSección. 
 Sección 1: Diseño y Requisitos de Originalidad   
 Sección 2: Fase 1 — Backend Apache Multi-Marca   
 Sección 3: Fase 2 — Terminación TLS en Nginx   
