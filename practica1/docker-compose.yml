@@ -4,8 +4,6 @@ services:
   apache_backend:
     build: ./apache
     container_name: apache_backend
-    ports:
-      - "8080:8080"
     volumes:
       - ./apache/ports.conf:/etc/apache2/ports.conf:ro
       - ./apache/sites/000-default-catchall.conf:/etc/apache2/sites-available/000-default-catchall.conf:ro
@@ -18,3 +16,24 @@ services:
       bash -c "a2dissite 000-default.conf &&
                a2ensite 000-default-catchall.conf pubdocs.conf privdocs.conf &&
                apachectl -D FOREGROUND"
+    networks:
+      - nimbus_net
+
+  nginx_frontend:
+    build: ./nginx
+    container_name: nginx_frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d/nimbusdocs.conf:/etc/nginx/conf.d/nimbusdocs.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - apache_backend
+    networks:
+      - nimbus_net
+
+networks:
+  nimbus_net:
+    driver: bridge

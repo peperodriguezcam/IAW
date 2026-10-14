@@ -193,6 +193,174 @@ practica1/
 
 # Fase 2 - Frontend Nginx
     ## Paso 2.1. Generación de Certificado SSL Autofirmado
-Me quedo aquí sin seguir hacer nada en la terminal.
-    
-FALTA EDITAR EL /ETC/HOSTS/ PARA QUE APAREZCA LA PUB Y PRIV EN NAVEGADOR
+      ## Paso 2.1.1. Creación de carpeta SSL y acceder
+   Ejecutamos 
+         -> mkdir -p nginx/ssl
+         -> cd nginx/ssl
+
+      ## Paso 2.1.2. Generamos la clave privada con prime256v1
+   Ejecutamos 
+	-> openssl ecparam -name prime256v1 -genkey -out nimbusdocs.key
+
+      ## Paso 2.1.3. Generamos el certificado autosignado y comprobamos
+   Ejecutamos
+	-> openssl req -new -x509 -key nimbusdocs.key -out nimbusdocs.crt -days 365 -subj "/CN=pubdocs.iaw.local/O=NimbusDocs Lab/C=ES" 
+   Comprobamos
+	-> ls -l 
+	     (Tiene que salir nimbusdocs.crt y nimbusdocs.key)
+
+    ## Paso 2.2. Creación de nginx/Dockerfile
+   Ejecutamos
+	-> mkdir -p nginx
+	-> nano nginx/Dockerfile
+		Dentro del Dockerfile escribimos:
+			FROM nginx:alpine
+			EXPOSE 80 443
+
+    ## Paso 2.3. Configuración del archivo global
+      ## Paso 2.3.1 Creación de archivo
+   Ejecutamos
+	-> nano nginx/nginx.conf
+		Dentro del fichero, el siguiente contenido:
+			user nginx;
+			worker_processes auto;
+			error_log /var/log/nginx/error.log warn;
+			pid /var/run/nginx.pid;
+
+			events {
+			    worker_connections 1024;
+			}
+
+			http {
+			    include /etc/nginx/mime.types;
+			    default_type application/octet-stream;
+
+			    # Definición de la zona de Rate Limiting (3 peticiones/segundo)
+			    limit_req_zone $binary_remote_addr zone=limite_nimbus:10m rate=3r/s;
+
+			    include /etc/nginx/conf.d/*.conf;
+			}
+	
+    ## Paso 2.4. Configuración de Proxy INverso, TLS y Seguridad
+      ## Paso 2.4.1. Creación de carpeta
+   Ejecutamos
+	-> mkdir -p nginx/conf.d
+	-> nano nginx/conf.d/nimbusdocs.conf
+		Dentro del fichero ponemos este contenido:
+			# 1. Redirección HTTP (80) a HTTPS (443)
+			server {
+			    listen 80;
+			    server_name pubdocs.iaw.local privdocs.iaw.local;
+
+			    return 301 https://$host$request_uri;
+			}
+
+			# 2. Bloque Servidor HTTPS (443)
+			server {
+			    listen 443 ssl;
+			    server_name pubdocs.iaw.local privdocs.iaw.local;
+
+			    # Certificados SSL ECDSA
+			    ssl_certificate /etc/nginx/ssl/nimbusdocs.crt;
+			    ssl_certificate_key /etc/nginx/ssl/nimbusdocs.key;
+
+			    # Protocolos seguros exigidos (TLS 1.2 y TLS 1.3)
+			    ssl_protocols TLSv1.2 TLSv1.3;
+			    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305;
+			    ssl_prefer_server_ciphers on;
+
+			    # Cabeceras de seguridad
+			    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+			    add_header X-Content-Type-Options "nosniff" always;
+			    add_header X-Frame-Options "SAMEORIGIN" always;
+
+			    location / {
+			        # Aplicar Rate Limiting (Permite ráfagas de 3 peticiones extra sin retardo)
+			        limit_req zone=limite_nimbus burst=3 nodelay;
+
+			        # Comunicación Proxy Inverso hacia el contenedor Backend de Apache
+			        proxy_pass http://apache_backend:8080;
+			        
+			        # Inyección de cabeceras HTTP hacia el backend
+			        proxy_set_header Host $host;
+			        proxy_set_header X-Real-IP $remote_addr;
+			        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			        proxy_set_header X-Forwarded-Proto $scheme;
+			    }
+			}
+
+    ## Paso 2.5. Actualizar el docker-compose.yml para unir Nginx + Apache
+   Editamos el docker-compose.yml en practica1/
+	Dentro del fichero, reemplazamos todo lo que haya por esto:
+		version: '3.8'
+
+		services:
+		  apache_backend:
+		    build: ./apache
+		    container_name: apache_backend
+		    volumes:
+		      - ./apache/ports.conf:/etc/apache2/ports.conf:ro
+		      - ./apache/sites/000-default-catchall.conf:/etc/apache2/sites-available/000-default-catchall.conf:ro
+		      - ./apache/sites/pubdocs.conf:/etc/apache2/sites-available/pubdocs.conf:ro
+		      - ./apache/sites/privdocs.conf:/etc/apache2/sites-available/privdocs.conf:ro
+		      - ./apache/html/default:/var/www/default/public_html:ro
+		      - ./apache/html/pubdocs:/var/www/pubdocs/public_html:ro
+		      - ./apache/html/privdocs:/var/www/privdocs/public_html:ro
+		    command: >
+		      bash -c "a2dissite 000-default.conf &&
+		               a2ensite 000-default-catchall.conf pubdocs.conf privdocs.conf &&
+		               apachectl -D FOREGROUND"
+		    networks:
+		      - nimbus_net
+
+		  nginx_frontend:
+		    build: ./nginx
+		    container_name: nginx_frontend
+		    ports:
+		      - "80:80"
+		      - "443:443"
+		    volumes:
+		      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+		      - ./nginx/conf.d/nimbusdocs.conf:/etc/nginx/conf.d/nimbusdocs.conf:ro
+		      - ./nginx/ssl:/etc/nginx/ssl:ro
+		    depends_on:
+		      - apache_backend
+		    networks:
+		      - nimbus_net
+
+		networks:
+		  nimbus_net:
+		    driver: bridge   
+
+    ## Paso 2.6. Despliegue y prueba de validación de la fase 2
+   Ejecutamos -> docker compose up -d --build
+
+	Ejecutamos las comprobaciones con curl:
+		Probamos redirección HTTP -> HTTPS (debe responder código 301)
+	-> curl -i -H "Host: pubdocs.iaw.local" http://localhost/
+
+		Probamos marca pública en HTTPS cifrado (-k para cert. autofirmado)
+	-> curl -k -H "Host: pubdocs.iaw.local" https://localhost/
+
+		Probamos marca privada en HTTPS:
+	-> curl -k -H "Host: privdocs.iaw.local" https://localhost/
+
+		Probamos la negociación SSL/TLS y el certificado ECDSA
+	-> openssl s_client -connect localhost:443 -tls1_3
+
+		Probamos el bloqueo por Rate Limiting (Bucle x 10 peticiones)
+	-> for i in {1..10}; do curl -k -o /dev/null -s -w "%{http_code}\n" https://localhost/ -H "Host: pubdocs.iaw.local"; done
+
+    ## Paso 3. Diagnostico de fallos
+      ## Paso 3.1. Apagamos el servicio
+   Ejecutamos -> docker restart apache_backend
+
+      ## Paso 3.2. Comentamos en apache/sites/pubdocs.conf
+   Ejecutamos -> nano /apache/sites/pubdocs.conf y comentamos el ServerName
+
+      ## Paso 3.3. Probamos con curl
+   Ejecutamos -> curl -k -H "Host: pubdocs.conf" https://localhost/
+   Debe darnos el Catch-All, entonces estará correcto.
+
+FIN de la práctica nº1 de IAW.
+~ Pepe Rodriguez
