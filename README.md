@@ -1,5 +1,5 @@
 # IAW
-Repositorio de las prácticas del módulo IAW de Pepe Rodríguez
+Repositorio de las prácticas del módulo IAW de Pepe Rodríguez.
 
 # ÍNDICE
 Práctica 1: NimbusDocs
