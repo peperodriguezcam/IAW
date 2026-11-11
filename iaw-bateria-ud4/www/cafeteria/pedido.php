@@ -25,7 +25,7 @@ $errores = [];
 $hecho = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre     = trim($_POST['nombre'] ?? '');
-    $plato      = $_POST['plato'] ?? '';
+    $platos      = $_POST['platos'] ?? '';
     $comentario = trim($_POST['comentario'] ?? '');
 
     // ✍️ 3.2 · La cantidad tiene que ser un número ENTERO del 1 al 5. Si no lo es, añade a $errores:
@@ -42,18 +42,31 @@ if ($cantidad === false) {
 }
     // ✍️ 3.3 · El plato tiene que estar en la carta. Busca en $platos el que tenga ese nombre y guárdalo en $elegido.
     //    Si no está, añade a $errores: 'Ese plato no está en la carta.'
+
+PENDIENTE
 $elegido = $null ;
 foreach ($platos as $p) {
-    if ( $p['nombre'] === $plato) {
+    if ( $p['nombre'] === $platos) {
         $elegido = $p ;
     }
 }
 if ($elegido === null) {
     $errores[] = 'Ese plato no está en la carta.';
 }
+HASTA AQUÍ
+
     // ✍️ 3.4 · Si hay errores, contesta con el código 422 (datos no válidos). Si no, $hecho = true.
     $hecho = true;
 }
+
+PENDIENTE
+if ($errores) {
+    http_response_code(400);
+} else {
+    $guardado = true;
+}
+HASTA AQUÍ
+
 require __DIR__ . '/inc/cabecera.php';
 ?>
 <form method="post">
