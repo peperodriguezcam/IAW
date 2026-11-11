@@ -42,8 +42,15 @@ if ($cantidad === false) {
 }
     // ✍️ 3.3 · El plato tiene que estar en la carta. Busca en $platos el que tenga ese nombre y guárdalo en $elegido.
     //    Si no está, añade a $errores: 'Ese plato no está en la carta.'
-    $elegido = $platos[0];
-
+$elegido = $null ;
+foreach ($platos as $p) {
+    if ( $p['nombre'] === $plato) {
+        $elegido = $p ;
+    }
+}
+if ($elegido === null) {
+    $errores[] = 'Ese plato no está en la carta.';
+}
     // ✍️ 3.4 · Si hay errores, contesta con el código 422 (datos no válidos). Si no, $hecho = true.
     $hecho = true;
 }
