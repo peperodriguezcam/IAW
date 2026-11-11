@@ -18,11 +18,13 @@ function euros(float $x): string {
 
 $errores = [];
 $hecho = false;
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre     = trim($_POST['nombre'] ?? '');
-    $plato      = $_POST['plato'] ?? '';
-    $comentario = trim($_POST['comentario'] ?? '');
+$metodo = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
+if ($metodo !== 'GET' && $metodo !== 'POST') {
+    http_response_code(405);
+    header('Allow: GET, POST');
+    exit('Método no permitido');
+}
     // ✍️ 3.2 · La cantidad tiene que ser un número ENTERO del 1 al 5. Si no lo es, añade a $errores:
     //    'La cantidad tiene que ser un número entero del 1 al 5.'   Pista: filter_var con FILTER_VALIDATE_INT y min_range/max_range.
     $cantidad = 1;
