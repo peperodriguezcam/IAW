@@ -30,8 +30,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // ✍️ 3.2 · La cantidad tiene que ser un número ENTERO del 1 al 5. Si no lo es, añade a $errores:
     //    'La cantidad tiene que ser un número entero del 1 al 5.'   Pista: filter_var con FILTER_VALIDATE_INT y min_range/max_range.
-    $cantidad = 1;
+$cantidad = filter_var($_POST['cantidad'] ?? '', FILTER_VALIDATE_INT, [
+    'options' => [
+	'min_range' => 1,
+	'max_range' => 5
+    ]
+]);
 
+if ($cantidad === false) {
+    $errores[] = 'La cantidad tiene que ser un número entero del 1 al 5.';
+}
     // ✍️ 3.3 · El plato tiene que estar en la carta. Busca en $platos el que tenga ese nombre y guárdalo en $elegido.
     //    Si no está, añade a $errores: 'Ese plato no está en la carta.'
     $elegido = $platos[0];
