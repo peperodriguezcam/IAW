@@ -15,81 +15,76 @@ function euros(float $x): string {
 
 // ✍️ 3.1 · Esta página solo admite GET (ver el formulario) y POST (enviarlo). Con cualquier otro método:
 //    código 405, cabecera «Allow: GET, POST» y se acaba ahí. Pista: $_SERVER['REQUEST_METHOD'], http_response_code, header, exit.
-if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+$metodo = $_SERVER['REQUEST_METHOD'];
+if ($metodo !== 'GET' && $metodo !== 'POST') {
     http_response_code(405);
     header('Allow: GET, POST');
-    exit('Solo se puede consultar');
+    exit('Método no permitido');
 }
 
 $errores = [];
 $hecho = false;
+$nombre = '';
+$comentario = '';
+$cantidad = 1;
+$elegido = null;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre     = trim($_POST['nombre'] ?? '');
-    $platos      = $_POST['platos'] ?? '';
+    $nombrePlato = $_POST['plato'] ?? ''; // Usamos otra variable para no sobreescribir el array $platos
     $comentario = trim($_POST['comentario'] ?? '');
 
     // ✍️ 3.2 · La cantidad tiene que ser un número ENTERO del 1 al 5. Si no lo es, añade a $errores:
     //    'La cantidad tiene que ser un número entero del 1 al 5.'   Pista: filter_var con FILTER_VALIDATE_INT y min_range/max_range.
-$cantidad = filter_var($_POST['cantidad'] ?? '', FILTER_VALIDATE_INT, [
-    'options' => [
-	'min_range' => 1,
-	'max_range' => 5
-    ]
-]);
+    $cantidad = filter_var($_POST['cantidad'] ?? '', FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 5]]);
+    if ($cantidad === false) {
+        $errores[] = 'La cantidad tiene que ser un número entero del 1 al 5.';
+    }
 
-if ($cantidad === false) {
-    $errores[] = 'La cantidad tiene que ser un número entero del 1 al 5.';
-}
     // ✍️ 3.3 · El plato tiene que estar en la carta. Busca en $platos el que tenga ese nombre y guárdalo en $elegido.
     //    Si no está, añade a $errores: 'Ese plato no está en la carta.'
-
-PENDIENTE
-$elegido = $null ;
-foreach ($platos as $p) {
-    if ( $p['nombre'] === $platos) {
-        $elegido = $p ;
+    foreach ($platos as $p) {
+        if ($p['nombre'] === $nombrePlato) {
+            $elegido = $p;
+            break;
+        }
     }
-}
-if ($elegido === null) {
-    $errores[] = 'Ese plato no está en la carta.';
-}
-HASTA AQUÍ
+    if ($elegido === null) {
+        $errores[] = 'Ese plato no está en la carta.';
+    }
 
     // ✍️ 3.4 · Si hay errores, contesta con el código 422 (datos no válidos). Si no, $hecho = true.
-    $hecho = true;
+    if (!empty($errores)) {
+        http_response_code(422);
+    } else {
+        $hecho = true;
+    }
 }
-
-PENDIENTE
-if ($errores) {
-    http_response_code(400);
-} else {
-    $guardado = true;
-}
-HASTA AQUÍ
 
 require __DIR__ . '/inc/cabecera.php';
 ?>
 <form method="post">
-  <label>Tu nombre <input name="nombre"></label>
+  <label>Tu nombre <input name="nombre" value="<?= e($nombre) ?>"></label>
   <label>Plato
     <select name="plato">
 <?php foreach ($platos as $p): ?>
-      <option><?= e($p['nombre']) ?></option>
+      <option <?= (isset($nombrePlato) && $nombrePlato === $p['nombre']) ? 'selected' : '' ?>><?= e($p['nombre']) ?></option>
 <?php endforeach; ?>
     </select>
   </label>
-  <label>Cantidad <input name="cantidad" type="number" min="1" max="5" value="1"></label>
-  <label>Comentario <input name="comentario"></label>
+  <label>Cantidad <input name="cantidad" type="number" min="1" max="5" value="<?= e((string)$cantidad) ?>"></label>
+  <label>Comentario <input name="comentario" value="<?= e($comentario) ?>"></label>
   <button>Pedir</button>
 </form>
 
 <?php foreach ($errores as $error): ?>
   <p class="aviso"><?= e($error) ?></p>
 <?php endforeach; ?>
-<?php if ($hecho): ?>
+
+<?php if ($hecho && $elegido !== null): ?>
 <?php // ✍️ 3.5 · Estas líneas imprimen lo que escribió el usuario TAL CUAL: arréglalas para que no haya XSS. ?>
-  <p class="ok" id="pedido">Pedido recibido, <?= $nombre ?>: <?= $cantidad ?> × <?= $elegido['nombre'] ?>.</p>
-  <p id="comentario">Comentario: <?= $comentario ?></p>
+  <p class="ok" id="pedido">Pedido recibido, <?= e($nombre) ?>: <?= e((string)$cantidad) ?> × <?= e($elegido['nombre']) ?>.</p>
+  <p id="comentario">Comentario: <?= e($comentario) ?></p>
   <p id="total">Total: <?= euros($cantidad * $elegido['precio']) ?></p>
 <?php endif; ?>
 </body></html>
