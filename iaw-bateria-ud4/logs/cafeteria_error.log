@@ -1,0 +1,6 @@
+2026/11/13 16:59:07 [error] 173#173: *79 access forbidden by rule, client: 172.22.0.3, server: cafeteria.iaw.local, request: "GET /info.php HTTP/1.1", host: "cafeteria.iaw.local"
+2026/11/13 16:59:07 [error] 174#174: *80 access forbidden by rule, client: 172.22.0.3, server: cafeteria.iaw.local, request: "GET /inc/platos.php HTTP/1.1", host: "cafeteria.iaw.local"
+2026/11/13 17:01:44 [error] 215#215: *133 access forbidden by rule, client: 172.22.0.3, server: cafeteria.iaw.local, request: "GET /info.php HTTP/1.1", host: "cafeteria.iaw.local"
+2026/11/13 17:01:45 [error] 215#215: *134 access forbidden by rule, client: 172.22.0.3, server: cafeteria.iaw.local, request: "GET /inc/platos.php HTTP/1.1", host: "cafeteria.iaw.local"
+2026/11/13 17:09:28 [error] 247#247: *183 access forbidden by rule, client: 172.22.0.3, server: cafeteria.iaw.local, request: "GET /info.php HTTP/1.1", host: "cafeteria.iaw.local"
+2026/11/13 17:09:28 [error] 247#247: *184 access forbidden by rule, client: 172.22.0.3, server: cafeteria.iaw.local, request: "GET /inc/platos.php HTTP/1.1", host: "cafeteria.iaw.local"
