@@ -7,9 +7,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
-# ✍️ 4.4 La llave de las sesiones está escrita aquí, en el código (y el código acaba en Git).
-#        Que salga del entorno: la variable SECRET_KEY de config/polideportivo.env.
-app.secret_key = "polideportivo"
+# ✍️ 4.4 La llave de las sesiones cogida de la variable de entorno o valor por defecto
+app.secret_key = os.environ.get("SECRET_KEY", "polideportivo")
 
 # 👀 Detrás de Nginx: fiarse de UNA capa de X-Forwarded-For y X-Forwarded-Proto (las que pone nuestro Nginx)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
@@ -76,11 +75,13 @@ def quien():
 @app.route("/pista/<int:id>")
 def pista(id):
     p = buscar_pista(id)
-    # ✍️ 2.1 Si la pista no existe, un 404 de verdad (ahora sale una página vacía con un 200).
+    # ✍️ 2.1 Si la pista no existe, un 404 de verdad
+    if p is None:
+        abort(404)
     return render_template("pista.html", pista=p)
 
 
-@app.route("/reservar", methods=["GET"])   # ✍️ 2.2 El formulario se envía con POST, y esta ruta no lo acepta (405)
+@app.route("/reservar", methods=["GET", "POST"])   # ✍️ 2.2 Permitir método POST
 def reservar():
     errores = []
     hecha = None
@@ -88,25 +89,43 @@ def reservar():
         nombre = request.form.get("nombre", "").strip()
         comentario = request.form.get("comentario", "").strip()
         hora = entero(request.form.get("hora"))
-        pista = buscar_pista(entero(request.form.get("pista")))
+        pista_id = entero(request.form.get("pista"))
+        pista = buscar_pista(pista_id)
 
-        # ✍️ 2.3 Si el nombre está vacío, añade a errores: «Escribe tu nombre.»
-        #        Si la hora no es un entero de 9 a 21, añade: «La hora tiene que ser un número entero de 9 a 21.»
+        # ✍️ 2.3 Validaciones de nombre y hora
+        if not nombre:
+            errores.append("Escribe tu nombre.")
+        if hora is None or not (9 <= hora <= 21):
+            errores.append("La hora tiene que ser un número entero de 9 a 21.")
 
-        # ✍️ 2.4 La pista. Añade a errores, según el caso:
-        #        no existe → «Esa pista no existe.» · no está disponible → «Esa pista está cerrada.»
-        #        ya hay una reserva de esa pista a esa hora (mira RESERVAS) → «Esa pista ya está reservada a esa hora.»
+        # ✍️ 2.4 Validaciones de la pista y disponibilidad
+        if pista is None:
+            errores.append("Esa pista no existe.")
+        elif not pista["disponible"]:
+            errores.append("Esa pista está cerrada.")
+        else:
+            # Comprobar si ya hay una reserva para esa pista a esa hora
+            ocupada = False
+            for r in RESERVAS:
+                if r["pista"] == pista["id"] and r["hora"] == hora:
+                    ocupada = True
+                    break
+            if ocupada:
+                errores.append("Esa pista ya está reservada a esa hora.")
 
-        # ✍️ 2.5 Si hay errores: la misma página, con los errores y el código 422.
-        #        Si no: se apunta en RESERVAS (pista, hora, nombre y comentario) y se enseña la reserva hecha.
-        hecha = {"nombre": nombre, "pista": PISTAS[0], "hora": 18}   # provisional: bórralo cuando hagas el 2.5
+        # ✍️ 2.5 Gestión de errores (código 422) o guardado de la reserva
+        if errores:
+            return render_template("reservar.html", pistas=PISTAS, errores=errores, hecha=hecha), 422
+        else:
+            hecha = {"nombre": nombre, "pista": pista, "hora": hora, "comentario": comentario}
+            RESERVAS.append({"pista": pista["id"], "hora": hora, "nombre": nombre, "comentario": comentario})
 
     return render_template("reservar.html", pistas=PISTAS, errores=errores, hecha=hecha)
 
 
 @app.route("/entrar", methods=["GET", "POST"])
 def entrar():
-    # 👀 4.1 El login del conserje: si la contraseña es buena, se guarda su nombre en la sesión (la pulsera)
+    # 👀 4.1 El login del conserje
     error = ""
     if request.method == "POST":
         usuario = request.form.get("usuario", "")
@@ -126,26 +145,33 @@ def salir():
 
 @app.route("/admin")
 def admin():
-    # ✍️ 4.2 Solo para el conserje: sin sesión, a la página de entrar. Ahora entra cualquiera.
+    # ✍️ 4.2 Solo para el conserje: comprobar sesión activa
+    if "usuario" not in session:
+        return redirect(url_for("entrar"))
     filas = [dict(r, pista=buscar_pista(r["pista"])["nombre"]) for r in RESERVAS]
     return render_template("admin.html", usuario=session.get("usuario", "¿?"), reservas=filas)
 
 
 @app.route("/api/pistas")
 def api_pistas():
-    # ✍️ 6.1 Las pistas en JSON: la lista PISTAS entera.
-    # ✍️ 6.2 Con ?libres=1, solo las que están disponibles.
-    return "Sin hacer"
+    # ✍️ 6.1 y 6.2 Listado de pistas en JSON y filtrado con ?libres=1
+    if request.args.get("libres") == "1":
+        libres = [p for p in PISTAS if p["disponible"]]
+        return jsonify(libres)
+    return jsonify(PISTAS)
 
 
 @app.route("/api/pistas/<int:id>")
 def api_pista(id):
-    # ✍️ 6.3 Una pista en JSON. Si no existe: {"error": "No existe esa pista"} con el código 404 (también en JSON).
-    return "Sin hacer"
+    # ✍️ 6.3 Una pista en JSON o error 404 si no existe
+    p = buscar_pista(id)
+    if p is None:
+        return jsonify({"error": "No existe esa pista"}), 404
+    return jsonify(p)
 
 
 @app.route("/error")
 def error():
-    # 👀 Un fallo a propósito (bloque 5): ¿qué ve el usuario cuando el programa revienta?
+    # 👀 Un fallo a propósito (bloque 5)
     horas_libres = 0
     return f"Cada hora libre sale a {len(PISTAS) / horas_libres} pistas"
