@@ -1,0 +1,273 @@
+[2026-11-16 16:37:34 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 16:37:34 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 16:37:34 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 16:37:34 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 16:37:40 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 16:37:40 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 16:37:41 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 16:37:41 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 16:37:41 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 16:37:41 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 16:37:41 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 16:39:11 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 16:39:11 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 16:39:11 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 16:39:11 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 16:39:11 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 16:39:11 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 16:39:11 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 16:44:21 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 16:44:21 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 16:44:22 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 16:44:22 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 16:44:22 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 16:44:22 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 16:44:22 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 16:45:34 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 16:45:34 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 16:45:34 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 16:45:34 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 16:45:34 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 16:45:34 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 16:45:34 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 16:47:12 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 16:47:12 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 16:47:12 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 16:47:13 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 16:47:13 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 16:47:13 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 16:47:13 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:03:30 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:03:30 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:03:31 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:03:31 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:03:31 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:03:31 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:03:31 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:06:48 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:06:48 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:06:48 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:06:48 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:06:48 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:06:48 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:06:48 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:15:18 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:15:18 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:15:18 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:15:19 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:15:19 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:15:19 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:15:19 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:15:55 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:15:55 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:15:55 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:15:55 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:15:55 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:15:55 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:15:55 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:18:30 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:18:30 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:18:30 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:18:31 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:18:31 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:18:31 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:18:31 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:20:58 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:20:58 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:20:58 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:20:59 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:20:59 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:20:59 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:20:59 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:26:05 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:26:05 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:26:05 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:26:05 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:26:05 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:26:05 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:26:05 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:26:18 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:26:18 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:26:18 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:26:19 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:26:19 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:26:19 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:26:19 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:26:21 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:26:21 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:26:21 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:26:21 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:26:21 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:26:21 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:26:21 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:27:27 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:27:27 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:27:27 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:27:27 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:27:27 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:27:27 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:27:27 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:27:29 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:27:29 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:27:29 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:27:30 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:27:30 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:27:30 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:27:30 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:28:13 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:28:13 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:28:13 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:28:13 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:28:13 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:28:13 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:28:13 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:28:15 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:28:15 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:28:15 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:28:15 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:28:15 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:28:15 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:28:15 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:30:32 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:30:32 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:30:32 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:30:32 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:30:32 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:30:32 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:30:32 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:30:34 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:30:34 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:30:34 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:30:35 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:30:35 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:30:35 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:30:35 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:32:55 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:32:55 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:32:55 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:32:56 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:32:56 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:32:56 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:32:56 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:36:34 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:36:34 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:36:34 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:36:51 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:36:51 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:36:51 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:36:51 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:36:53 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:36:53 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:36:53 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 17:36:54 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 17:36:54 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 17:36:54 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 17:36:54 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 17:39:49 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 17:39:49 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 17:39:49 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 18:10:21 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 18:10:21 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 18:10:21 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 18:10:21 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 18:10:59 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 18:10:59 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 18:11:00 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 18:11:00 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 18:11:00 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 18:11:00 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 18:11:00 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 18:11:10 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 18:11:10 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 18:11:10 +0000] [1] [INFO] Shutting down: Master
+[2026-11-16 18:11:10 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-16 18:11:10 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-16 18:11:10 +0000] [1] [INFO] Using worker: sync
+[2026-11-16 18:11:10 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-16 18:16:19 +0000] [1] [INFO] Handling signal: term
+[2026-11-16 18:16:19 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-16 18:16:19 +0000] [1] [INFO] Shutting down: Master
+[2026-11-17 18:32:32 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-17 18:32:32 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-17 18:32:32 +0000] [1] [INFO] Using worker: sync
+[2026-11-17 18:32:32 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-17 18:32:38 +0000] [1] [INFO] Handling signal: term
+[2026-11-17 18:32:38 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-17 18:32:38 +0000] [1] [INFO] Shutting down: Master
+[2026-11-17 18:32:39 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-17 18:32:39 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-17 18:32:39 +0000] [1] [INFO] Using worker: sync
+[2026-11-17 18:32:39 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-17 18:32:55 +0000] [1] [INFO] Handling signal: term
+[2026-11-17 18:32:55 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-17 18:32:55 +0000] [1] [INFO] Shutting down: Master
+[2026-11-17 18:32:55 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-17 18:32:55 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-17 18:32:55 +0000] [1] [INFO] Using worker: sync
+[2026-11-17 18:32:55 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-17 18:45:28 +0000] [1] [INFO] Handling signal: term
+[2026-11-17 18:45:28 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-17 18:45:28 +0000] [1] [INFO] Shutting down: Master
+[2026-11-17 18:45:29 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-17 18:45:29 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-17 18:45:29 +0000] [1] [INFO] Using worker: sync
+[2026-11-17 18:45:29 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-17 18:47:47 +0000] [1] [INFO] Handling signal: term
+[2026-11-17 18:47:47 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-17 18:47:47 +0000] [1] [INFO] Shutting down: Master
+[2026-11-17 18:47:47 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-17 18:47:47 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-17 18:47:47 +0000] [1] [INFO] Using worker: sync
+[2026-11-17 18:47:47 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-17 18:48:40 +0000] [1] [INFO] Handling signal: term
+[2026-11-17 18:48:40 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-17 18:48:41 +0000] [1] [INFO] Shutting down: Master
+[2026-11-17 18:48:41 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-17 18:48:41 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-17 18:48:41 +0000] [1] [INFO] Using worker: sync
+[2026-11-17 18:48:41 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-17 18:50:31 +0000] [1] [INFO] Handling signal: term
+[2026-11-17 18:50:31 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-17 18:50:32 +0000] [1] [INFO] Shutting down: Master
+[2026-11-17 18:50:32 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-17 18:50:32 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-17 18:50:32 +0000] [1] [INFO] Using worker: sync
+[2026-11-17 18:50:32 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-17 18:51:34 +0000] [1] [INFO] Handling signal: term
+[2026-11-17 18:51:34 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-17 18:51:34 +0000] [1] [INFO] Shutting down: Master
+[2026-11-17 18:51:35 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-17 18:51:35 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-17 18:51:35 +0000] [1] [INFO] Using worker: sync
+[2026-11-17 18:51:35 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-17 20:45:37 +0000] [1] [INFO] Handling signal: term
+[2026-11-17 20:45:37 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-17 20:45:37 +0000] [1] [INFO] Shutting down: Master
+[2026-11-18 17:20:25 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-18 17:20:25 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-18 17:20:25 +0000] [1] [INFO] Using worker: sync
+[2026-11-18 17:20:25 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-18 17:21:32 +0000] [1] [INFO] Handling signal: term
+[2026-11-18 17:21:32 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-18 17:21:32 +0000] [1] [INFO] Shutting down: Master
+[2026-11-18 17:21:32 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-18 17:21:32 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-18 17:21:32 +0000] [1] [INFO] Using worker: sync
+[2026-11-18 17:21:32 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-18 17:22:46 +0000] [1] [INFO] Handling signal: term
+[2026-11-18 17:22:46 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-18 17:22:46 +0000] [1] [INFO] Shutting down: Master
+[2026-11-20 15:55:58 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-20 15:55:58 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-20 15:55:58 +0000] [1] [INFO] Using worker: sync
+[2026-11-20 15:55:58 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-20 15:56:05 +0000] [1] [INFO] Handling signal: term
+[2026-11-20 15:56:05 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-20 15:56:05 +0000] [1] [INFO] Shutting down: Master
+[2026-11-20 15:56:06 +0000] [1] [INFO] Starting gunicorn 23.0.0
+[2026-11-20 15:56:06 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+[2026-11-20 15:56:06 +0000] [1] [INFO] Using worker: sync
+[2026-11-20 15:56:06 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-11-20 15:56:47 +0000] [1] [INFO] Handling signal: term
+[2026-11-20 15:56:47 +0000] [7] [INFO] Worker exiting (pid: 7)
+[2026-11-20 15:56:47 +0000] [1] [INFO] Shutting down: Master
