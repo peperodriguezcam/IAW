@@ -1,4 +1,3 @@
-# API del inventario del aula (UD6): los equipos y las incidencias, en JSON, sacados de MariaDB con PyMySQL.
 # Lee la conexión del entorno (servidor/inventario.env, al arrancar). Si cambias algo: ./bateria.sh recargar
 import os
 import pymysql
@@ -55,17 +54,47 @@ def buscar():
         return jsonify(cur.fetchall())
 
 
-@app.route("/api/incidencias", methods=["GET", "POST"])
-def incidencias():
     # ✍️ 6 · Integrador. Usa la tabla incidencias que creaste en el 1.3.
     #
     # GET  → la lista de incidencias, la más nueva primero:
     #        [{"id": 2, "equipo_id": 3, "descripcion": "…"}, …]       (jsonify de lo que da fetchall)
     #
-    # POST → recibe un JSON {"equipo_id": 3, "descripcion": "No enciende"}  (datos = request.get_json(silent=True) or {})
+    # POST → recibe un JSON {"equipo_id": 3, "descripcion": "No enciende"}  (datos = request.get_json(sile>
     #        - descripción vacía o que falta                → {"error": "…"}, 422
-    #        - equipo_id que no es de ningún equipo         → {"error": "…"}, 422   (búscalo en equipos, con %s)
+    #        - equipo_id que no es de ningún equipo         → {"error": "…"}, 422   (búscalo en equipos, c>
     #        - si todo está bien: INSERT con %s, c.commit() y {"id": cur.lastrowid}, 201
     #
     # Todo con consultas preparadas: la descripción la escribe cualquiera.
-    return jsonify({"error": "Sin hacer todavía"}), 501
+
+@app.route("/api/incidencias", methods=["GET", "POST"])
+def incidencias():
+    if request.method == "GET":
+        with conectar() as c, c.cursor() as cur:
+            cur.execute(
+                "SELECT id, equipo_id, descripcion FROM incidencias ORDER BY id DESC"
+            )
+            return jsonify(cur.fetchall())
+
+    datos = request.get_json(silent=True) or {}
+    equipo_id = datos.get("equipo_id")
+    descripcion = datos.get("descripcion")
+
+    if not isinstance(descripcion, str) or not descripcion.strip():
+        return jsonify({"error": "La descripción es obligatoria"}), 422
+
+    if equipo_id is None or isinstance(equipo_id, bool):
+        return jsonify({"error": "El equipo_id es obligatorio"}), 422
+
+    with conectar() as c, c.cursor() as cur:
+        cur.execute("SELECT id FROM equipos WHERE id = %s", (equipo_id,))
+        if cur.fetchone() is None:
+            return jsonify({"error": "El equipo indicado no existe"}), 422
+
+        cur.execute(
+            "INSERT INTO incidencias (equipo_id, descripcion) VALUES (%s, %s)",
+            (equipo_id, descripcion),
+        )
+        c.commit()
+        nuevo_id = cur.lastrowid
+
+    return jsonify({"id": nuevo_id}), 201
