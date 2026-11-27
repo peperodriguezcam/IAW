@@ -1,15 +1,23 @@
-#!/bin/sh
+#! /bin/sh
 # Copia de seguridad de la base de datos de Radio Marea (UD6, apartado 10). Se lanza con: ./practica.sh copia
 # Corre en «admin», el ordenador del administrador: tu carpeta servidor/ es /srv/servidor y copias/ es /copias.
-# En un servidor de verdad la lanzaría cron cada noche: 30 3 * * * /srv/servidor/copia.sh
+# En un servidor de verdad la lanzaría cron cada noche: 30 3 * * * /srv/servidor/radio.env
 # Este script va a Git: por eso NO lleva ninguna contraseña escrita.
 set -e
 
 # ✍️ C4 · Escribe el script, paso a paso:
 #   1. Carga las variables de /srv/servidor/radio.env (así tienes $DB_HOST, $DB_NAME, $COPIAS_USER, $COPIAS_PASS…).
+. /srv/servidor/radio.env
+
 #   2. Una variable FECHA con la fecha y la hora, así: 20261123-033000.
+FECHA=$(date +"%Y%m%d-%H%M%S")
+
 #   3. La copia de la base $DB_NAME con mysqldump, entrando como el usuario de las copias (COPIAS_USER, no radio_web),
 #      en /copias/radio-$FECHA.sql. Sin bloquear la web y sin pedir el permiso PROCESS.
-#   4. Que no se acumulen: borra las copias radio-*.sql de más de 7 días.
-#   5. Que diga qué fichero ha creado.
+mysqldump -h "$DB_HOST" -u "$COPIAS_USER" -p"$COPIAS_PASS" --single-transaction --no-tablespaces "$DB_NAME" > "/copias/radio-$FECHA.sql"
 
+#   4. Que no se acumulen: borra las copias radio-*.sql de más de 7 días.
+find /copias -name "radio-*.sql" -mtime +7 -delete
+
+#   5. Que diga qué fichero ha creado.
+echo "Copia creada en /copias/radio-$FECHA.sql"
